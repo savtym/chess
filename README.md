@@ -1,0 +1,2 @@
+install notes: fe-architecture is a different git repo you will need to git clone it in the root directory of the project for webpack to build!
+$ git clone ssh://git@git.nextiva.xyz:7999/fea/javascript.git
