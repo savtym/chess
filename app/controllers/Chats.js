@@ -36,7 +36,7 @@ class Chats {
     }
 
     return {
-      data: rows,
+      data: rows.reverse(),
       status: 200,
     }
   }

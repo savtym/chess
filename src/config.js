@@ -1,20 +1,21 @@
+const PORT = process.env.PORT || '8080';
+const __PROD__ = process.env.NODE_ENV === 'production';
+
 const config = {
 
 };
 
 const configProd = {
-  apiDomain: 'http://127.0.0.1:8080',
+  apiDomain: '',
 };
 
 const configDev = {
-  apiDomain: 'http://0.0.0.0:8080',
+  apiDomain: `http://0.0.0.0:${PORT}`,
 };
 
-
-
-if (process.env.NODE_ENV === 'production') {
+if (__PROD__) {
   Object.assign(config, configProd);
-} else if (process.env.NODE_ENV === 'development') {
+} else {
   Object.assign(config, configDev);
 }
 

@@ -123,12 +123,12 @@ class Rooms {
       };
     }
 
-    if (gameOfPlayer.rows.length !== 0) {
-      return {
-        err: `You have a game.`,
-        status: 409,
-      };
-    }
+    // if (gameOfPlayer.rows.length !== 0) {
+    //   return {
+    //     err: `You have a game.`,
+    //     status: 409,
+    //   };
+    // }
 
     const date = Helpers.getUnixTimeNow();
 

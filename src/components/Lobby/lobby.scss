@@ -1,0 +1,10 @@
+.lobby {
+	margin: 10px auto;
+	display: grid;
+	grid-template-rows: auto 1fr;
+	padding: 10px 20px;
+	width: 100%;
+	max-width: 500px;
+	overflow: hidden;
+	box-sizing: content-box;
+}

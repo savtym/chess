@@ -163,7 +163,7 @@ class Socket {
     const isExistRoom = this._isExistRoom();
     if (typeof(isExistRoom) !== 'boolean') return callback(isExistRoom);
 
-    this._roomDisconnect('room.disconnect-visitor');
+    this._roomDisconnect('room.disconnect-visitor', true);
 
     callback({
       status: 201,
@@ -248,9 +248,9 @@ class Socket {
   }
 
 
-  _roomDisconnect(nameEmit) {
+  _roomDisconnect(nameEmit, isVisitor = false) {
     this.socket.leave(this.room);
-    this.io.to(this.room).emit(nameEmit, this.user.username);
+    this.io.to(this.room).emit(nameEmit, { user: this.user.username, isVisitor });
     this.room = null;
   }
 
@@ -303,6 +303,7 @@ module.exports = (io) => {
 
       socket.emit('rooms', rooms.data);
       socket.emit('chat.general', messages.data);
+      socket.broadcast.emit('user.connected', per.username);
 
       socket.on('room.create', await createRoom);
       socket.on('room.connect', await connectToGame);

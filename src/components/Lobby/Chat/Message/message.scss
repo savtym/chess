@@ -1,64 +1,74 @@
 $messageBgc: #f5f5f5;
-$messageBgcMine: #7CB27F;
+$messageBgcMine: #E8F5E9;
 
 .message {
-    margin-top: 15px;
-    max-width: 60%;
-    &.mine__message {
-        align-self: flex-end;
-    }
-    &:first-child {
-        margin: 0;
-    }
-    &__header {
-        display: flex;
-        justify-content: flex-start;
-        .author, .time {
-            font-size: 14px;
-            line-height: 14px;
-            margin: 0;
-        }
-        .time {
-            font-size: 12px;
-            margin-left: 7px;
-            color: #777
-        }
-    }
-    &__content {
-        display: inline-block;
-        padding: 10px;
-        margin-top: 10px;
-        font-size: 14px;
-        position: relative;
-        border: 1px solid $messageBgc;
-        background: $messageBgc;
-        z-index: 1;
-        border-radius: 3px;
-        border-top-left-radius: none;
-        color: #111;
-        &:before {
-            content: '';
-            display: inline-block;
-            position: absolute;
-            top: -6px;
-            left: 0px;
-            border-top-left-radius: 2px;
-            border-bottom-left-radius: 4px;
-            width: 10px;
-            height: 10px;
-            z-index: 2;
-            transform: rotate(45deg);
-            border: 1px solid $messageBgc;
-            background: $messageBgc;
-        }
-    }
-}
+	margin-top: 10px;
+	max-width: 60%;
 
-.mine__content {
-    border: 1px solid $messageBgcMine;
-    background: $messageBgcMine;
-    &:before {
-        border: 1px solid $messageBgcMine;
-        background: $messageBgcMine;
-    }
+	&__mine {
+		margin-left: auto;
+
+		.message__header {
+			justify-content: flex-end;
+		}
+
+		.message__content {
+			background: $messageBgcMine;
+			border: 1px solid #81C784;
+
+			&:before {
+				left: auto;
+				right: 5px;
+				background: $messageBgcMine;
+				border-top: 1px solid #81C784;
+				border-left: 1px solid #81C784;
+			}
+		}
+	}
+
+	&__header {
+		display: flex;
+		flex-shrink: 0;
+	}
+
+	&__author,
+	&__time {
+		font-size: 14px;
+		line-height: 14px;
+		margin: 0;
+	}
+
+	&__time {
+		font-size: 12px;
+		margin-left: 7px;
+		color: #666;
+	}
+
+	&__content {
+		margin-top: 5px;
+		padding: 10px;
+		color: #111;
+		font-size: 14px;
+		position: relative;
+		border: 1px solid #e0e0e0;
+		background: $messageBgc;
+		border-radius: 3px;
+		z-index: 1;
+
+		&:before {
+			content: '';
+			display: inline-block;
+			position: absolute;
+			top: -3px;
+			left: 5px;
+			width: 6px;
+			height: 6px;
+			z-index: 2;
+			transform: rotate(45deg);
+			border: 1px solid $messageBgc;
+			background: $messageBgc;
+			border-top: 1px solid #e0e0e0;
+			border-left: 1px solid #e0e0e0;
+		}
+	}
 }

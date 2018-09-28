@@ -1,11 +1,17 @@
 .game {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    &.active {
-        background-color: #C1FFC1
-    }
-    &:not(.active):hover {
-        background-color: #eee;
-    }
+	margin-top: 10px;
+	display: flex;
+	justify-content: space-between;
+	padding: 6px 10px;
+	cursor: pointer;
+	border-radius: 3px;
+	transition: all 0.15s ease-in-out;
+
+	&.active {
+		background-color: #C1FFC1
+	}
+
+	&:not(.active):hover {
+		background-color: #eee;
+	}
 }

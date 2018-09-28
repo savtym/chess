@@ -1,8 +1,21 @@
 .game-container {
-    display: grid;
-    margin: 0 auto;
-    margin-top: 50px;
-    width: 480px;
-    height: 580px;
-    grid-template-rows: repeat(3 , 1fr);  
+	display: grid;
+	margin: 0 auto;
+	padding: 20px 0;
+	width: 480px;
+	overflow: hidden;
+	grid-row-gap: 20px;
+	grid-template-rows: auto 480px minmax(auto, 1fr);
+
+	@media all and (max-height: 980px) {
+		overflow: initial;
+
+		.chat {
+			max-height: 350px;
+		}
+	}
+
+	.chat {
+		margin-top: 0;
+	}
 }

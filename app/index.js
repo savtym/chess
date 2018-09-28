@@ -1,16 +1,17 @@
-
 const routes = require('./routes');
+const os = require('os');
 const cors = require('cors');
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
-
-
+const ip = require('ip');
 const bearerToken = require('express-bearer-token');
 
+
 // Constants
+const __PROD__ = process.env.NODE_ENV === 'production';
 const PORT = process.env.PORT || 8080;
-const HOST = process.env.HOST || '0.0.0.0';
+const HOST = (__PROD__ ? ip.address() : process.env.HOST) || '0.0.0.0';
 
 // App
 const app = express();
@@ -35,7 +36,8 @@ app.use(bodyParser.urlencoded({
 // Add routes for API
 routes(app, io, '/api/v1');
 
-if (process.env.NODE_ENV === 'production') {
+if (__PROD__) {
+
   app.use(express.static(
     path.resolve(__dirname, '..', 'dist'),
   ));

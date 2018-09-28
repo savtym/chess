@@ -1,51 +1,59 @@
 .signin {
-    max-width: 300px;
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    background-color: #fff;
-    margin-top: 50px;
-    border-radius: 5px;
-    padding: 20px 15px;
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
-    h3 {
-        font-size: 34px;
-        margin: 0;
-        text-align: center;
-    }
-    a {
-        text-decoration: none;
-    }
-    p {
-        margin: 0;
-        font-size: 14px;
-    }
-    &__credentials {
-        margin: 10px 0;
-    }
-    &__spinner {
-        margin: 15px auto;
-    }
-    &__error {
-        color: red;
-        margin-top: 10px;
-        text-align: center;
-    }
-    &__bottom {
-        overflow: hidden;
-        &__button {
-            float: left;
-        }
-        &__lost {
-            float: right;
-            p {
-                line-height: 32px;
-            }
-        }
-    }
+	width: 100%;
+	max-width: 300px;
+	display: flex;
+	flex-direction: column;
+	margin: 50px auto 0;
 
-    &__signup {
-        margin-top: 20px;
-        text-align: center;
-    }
+	form {
+		border-radius: 5px;
+		padding: 20px 15px;
+		background-color: #fff;
+		box-shadow: rgba(0, 0, 0, 0.12) 0 1px 6px,
+								rgba(0, 0, 0, 0.12) 0 1px 4px;
+	}
+
+	h3 {
+		font-size: 34px;
+		margin: 0;
+		text-align: center;
+	}
+
+	.center {
+		margin-top: 10px;
+	}
+
+	p {
+		margin: 0;
+		font-size: 14px;
+	}
+
+	&__credentials {
+		margin: 10px 0;
+	}
+
+	&__spinner {
+		margin: 15px auto;
+	}
+
+	&__error {
+		color: red;
+		margin-top: 10px;
+		text-align: center;
+	}
+
+	&__bottom {
+		text-align: center;
+
+		&__button {
+			width: 100%;
+		}
+
+		&__lost {
+			margin-top: 10px;
+			p {
+				line-height: 32px;
+			}
+		}
+	}
 }

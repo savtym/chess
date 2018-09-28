@@ -1,10 +1,32 @@
-@import url('https://fonts.googleapis.com/css?family=Nunito:300i,400,700');
-
 @import '~normalize.css';
+@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+@import url('https://fonts.googleapis.com/css?family=Nunito:300i,400,700');
 
 body {
   margin: 0;
   padding: 0;
   font-family: 'Nunito', sans-serif;
   background-color: #eee;
+}
+
+a {
+	color: #03A9F4;
+	text-decoration: underline;
+	transition: all .15s ease-in-out;
+
+	&:hover {
+		color: #01579B;
+		text-decoration: none;
+	}
+}
+
+.app {
+	display: grid;
+	grid-template-rows: auto 1fr;
+	height: 100vh;
+	min-height: 600px;
+}
+
+.center {
+	text-align: center;
 }

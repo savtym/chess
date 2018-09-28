@@ -1,4 +1,8 @@
 .cancel-confirm-component {
-    display: grid;
-    grid-template-columns: 1fr 1fr;  
+	display: flex;
+	justify-content: space-between;
+
+	button {
+		width: 40%;
+	}
 }
