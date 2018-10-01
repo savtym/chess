@@ -10,7 +10,7 @@ brew install postgresql
 
 Also you should have `nodejs` with `npm`
 
-Second, create DB and start migrations for database ([more](#Backend)):
+Second, create DB and start migrations for database ([more](#backend)):
 ```sh
 psql
 CREATE DATABASE chess;
