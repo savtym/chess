@@ -1,26 +1,24 @@
-##Server 
+## Server 
 
-###Install
+### Install
 First, you need to create database for ChessGame:
 ```sh
 psql
 CREATE DATABASE chess;
 ```
 
-Second, for start you need to run comman:
+Second, for start you need to run command:
 ```sh
 npm run server
 ```
 
-
-
-###Authorization
+### Authorization
 For authorization needs to add to headers:
 `Authorization: Bearer ${token}`
 
 
 
-###API
+### API
 You need to add `/api/v1` to route.
 
 For route `/user`:
@@ -43,7 +41,7 @@ Route   | Params                                        | Return
 Example: `/api/v1/socket` with headers Authorization.
 
 
-####Socket
+#### Socket
 
 Route                       | Params                                        | Return
 ----------------------------|-----------------------------------------------|------------------------
