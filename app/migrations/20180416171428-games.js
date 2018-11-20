@@ -7,6 +7,9 @@ var seed;
 const Helpers = require('../utils/helpers');
 
 const defaultValues = [
+	[2, 1, 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1', 1542315785, true],
+	[1, 2, 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1', 1542317884, true],
+	[3, 2, 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1', 1542319884, true],
 ];
 
 /**
@@ -51,7 +54,7 @@ exports.up = function (db, callback) {
     time: { type: 'string', notNull: true },
     is_give_up: { type: 'boolean', defaultValue: false },
   }, () => {
-    const columns = ['first_player_id', 'second_player_id', 'initial_state', 'time'];
+    const columns = ['first_player_id', 'second_player_id', 'initial_state', 'time', 'is_give_up'];
     for (let game of defaultValues) {
       db.insert('games', columns.slice(0, game.length), game, callback);
     }

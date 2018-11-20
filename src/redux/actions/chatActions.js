@@ -87,3 +87,9 @@ export const removeMessagesFromLocalChat = () => {
 		type: REMOVE_MESSAGE_LOCAL,
 	}
 };
+
+export const disconnectedUser = () => {
+	return {
+		type: USER_DISCONNECTED_LOCAL,
+	}
+};

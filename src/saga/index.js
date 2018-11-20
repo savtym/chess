@@ -11,8 +11,10 @@ import {
 	WATCH_ROOM_REQUEST,
 	EXIT,
 } from "../redux/constants/ActionTypes"
+import { GET_HISTORY_ALL } from "../redux/constants/history"
 import { LOGIN } from "../redux/constants/user"
 import * as chatActions from '../redux/actions/chatActions';
+import * as historyActions from '../redux/actions/history';
 import { INSERT_MESSAGE_GENERAL, INSERT_MESSAGE_LOCAL } from '../redux/constants/chat';
 import config from '../config';
 
@@ -51,6 +53,10 @@ function subscribe(socket) {
 			emit(actions.makeMoveUpdate(data));
 		});
 
+		socket.on('history.all', (data) => {
+			emit(historyActions.setAllHistory(data));
+		});
+
 		socket.on('room.disconnect', (data) => {
 			emit(actions.roomLeave(data.user));
 			emit(chatActions.watcher({
@@ -65,7 +71,7 @@ function subscribe(socket) {
 		});
 
 		socket.on('user.disconnect', (data) => {//if someone close the game, (data = name of player)
-			emit(chatActions.disconnecntedUser({ user: data, isConnected: false }));
+			emit(chatActions.disconnectedUser({ user: data, isConnected: false }));
 		});
 
 		socket.on('chat.general', (data) => {
@@ -109,6 +115,7 @@ function* write(socket, token) {
 	yield fork(inserMessagesToLocal, socket, token, "chat.local.insert", INSERT_MESSAGE_LOCAL, chatActions.insertMessageLocalChat);
 	yield fork(giveUpSaga, socket, token, "room.give-up", GIVE_UP);
 	yield fork(giveUpSaga, socket, token, "room.give-up", EXIT);
+	yield fork(getHistoryAll, socket, token, "history.all", GET_HISTORY_ALL);
 }
 
 function* insertMessagesToGeneral(socket, token) {
@@ -227,6 +234,22 @@ function* giveUpSaga(socket, token, emitType, actionType) {
 			}
 		} catch (error) {
 			console.log("CATCH TRIGGERED in saga.giveUpSaga", error)
+		}
+	}
+}
+
+function* getHistoryAll(socket, token, emitType, actionType) {
+	while (true) {
+		try {
+			yield take(actionType);
+			const data = yield new Promise(resolve => {
+				socket.emit(emitType, { token }, (data) => resolve(data))
+			});
+			if (data.err) {
+				console.log("ERROR ", data.err)
+			}
+		} catch (error) {
+			console.log("CATCH TRIGGERED in history.all", error)
 		}
 	}
 }

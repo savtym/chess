@@ -3,6 +3,7 @@ import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import logOut from '../../redux/actions/logOut';
+import { getAllHistory } from '../../redux/actions/history';
 
 import './header.scss';
 
@@ -18,7 +19,10 @@ const Header = (props) => (
 			)}
 
 			{props.user && (
-				<Button bsStyle="success" onClick={props.logOut}>Logout</Button>
+				<React.Fragment>
+					<Button bsStyle="info" onClick={props.getAllHistory}>History</Button>
+					<Button bsStyle="success" onClick={props.logOut}>Logout</Button>
+				</React.Fragment>
 			)}
 		</div>
 	</div>
@@ -29,7 +33,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	logOut: () => logOut(dispatch)
+	logOut: () => logOut(dispatch),
+	getAllHistory: () => dispatch(getAllHistory()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

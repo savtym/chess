@@ -5,9 +5,10 @@ import user from './user';
 import route from './route';
 import signin from './signin';
 import signup from './signup';
+import history from './history';
 import {chat} from './chat'
 
-const appReducer = combineReducers({ chat , playstate, user, signup, signin, route, rooms });
+const appReducer = combineReducers({ chat , playstate, user, signup, signin, route, rooms, history });
 const rootReducer = (state, action) => {
   if (action.type === 'LOGOUT') {
     state = undefined;

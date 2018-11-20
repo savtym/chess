@@ -12,6 +12,8 @@ import {
 	UPDATE_ROOM_STATE,
 	WATCH_ROOM,
 	WATCH_ROOM_REQUEST,
+	GET_HISTORY_ALL,
+	SET_HISTORY_ALL,
 } from "../constants/ActionTypes";
 import { ROUTE } from '../../redux/constants/route';
 

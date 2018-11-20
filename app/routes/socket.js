@@ -4,6 +4,7 @@ const User = require('../controllers/User');
 const Game = require('../controllers/Game');
 const Rooms = require('../controllers/Rooms');
 const Chats = require('../controllers/Chats');
+const History = require('../controllers/History');
 const Helpers = require('../utils/helpers');
 
 
@@ -30,6 +31,7 @@ class Socket {
     this.getMessageFromLocal = this.getMessageFromLocal.bind(this);
     this.insertMessageToLocal = this.insertMessageToLocal.bind(this);
     this.insertMessageToGeneral = this.insertMessageToGeneral.bind(this);
+    this.getAllHistoryGames = this.getAllHistoryGames.bind(this);
   }
 
 
@@ -229,6 +231,23 @@ class Socket {
   }
 
 
+  async getAllHistoryGames(data, callback) {
+		const isExistCallback = Socket._isExistCallback(callback);
+		if (typeof(isExistCallback) !== 'boolean') return isExistCallback;
+
+		const res = await History.getAllHistoryByUsers(data);
+
+		callback({
+			err: res.err,
+			status: res.status,
+		});
+
+		if (!res.err) {
+			this.io.emit('history.all', res.data);
+		}
+	}
+
+
   async disconnect() {
     if (this.room) {
       const id = Helpers.getRoomId(this.room);
@@ -296,6 +315,7 @@ module.exports = (io) => {
         insertMessageToLocal,
         insertMessageToGeneral,
         disconnect,
+				getAllHistoryGames,
       } = new Socket(socket, io, per);
 
       const rooms = await Rooms.getAllList();
@@ -316,6 +336,8 @@ module.exports = (io) => {
       socket.on('chat.general', await Socket.getMessageFromGeneral);
       socket.on('chat.local.insert', await insertMessageToLocal);
       socket.on('chat.general.insert', await insertMessageToGeneral);
+
+      socket.on('history.all', await getAllHistoryGames);
 
       socket.on('disconnect', await disconnect);
     });

@@ -1,0 +1,3 @@
+
+export const GET_HISTORY_ALL = 'GET_HISTORY_ALL';
+export const SET_HISTORY_ALL = 'SET_HISTORY_ALL';
