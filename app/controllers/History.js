@@ -28,8 +28,29 @@ class History {
 			}
 		}
 
+		const data = rows.reduce((pr, row) => {
+			if (!pr[row.game_id]) {
+				pr[row.game_id] = {
+					first_player: row.username,
+					steps: [],
+				};
+			} else if (!pr[row.game_id].second_player) {
+				pr[row.game_id].second_player = row.username;
+			}
+
+			pr[row.game_id].steps.push({
+				id : row.id,
+				time: row.time,
+				state: row.state,
+				give_up: row.give_up,
+				username: row.username,
+			});
+			return pr;
+		}, {});
+
+		console.log({data})
 		return {
-			data: rows,
+			data,
 			status: 201,
 		}
 	}

@@ -6,6 +6,7 @@ module.exports = {
     	h.game_id,
     	h.player_id,
     	h.time,
+    	h.state,
     	h.give_up,
     	u.username
     FROM

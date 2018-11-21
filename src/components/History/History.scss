@@ -1,0 +1,40 @@
+.c-history {
+  max-height: 500px;
+
+  .info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h4 {
+      margin: 0;
+      line-height: 1;
+    }
+  }
+
+  .board {
+    margin-top: 15px;
+  }
+
+  .navigation {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    button {
+      padding-left: 10%;
+      padding-right: 10%;
+    }
+  }
+
+  .total-step {
+    font-size: 18px;
+  }
+
+  @media screen and (min-width: 576px) {
+    .modal-dialog {
+      max-width: 514px;
+    }
+  }
+}

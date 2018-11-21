@@ -1,0 +1,31 @@
+$width-number: 30px;
+
+.c-round {
+  display: flex;
+  margin: 0 -1rem;
+  padding: 10px 1rem;
+  transition: all .3s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    background: #eee;
+  }
+
+  .description {
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - #{$width-number});
+  }
+
+  span {
+    display: block;
+    width: $width-number;
+    font-size: 1rem;
+    padding-right: 5px;
+  }
+
+  h6 {
+    margin: 0;
+    line-height: inherit;
+  }
+}

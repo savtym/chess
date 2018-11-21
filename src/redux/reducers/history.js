@@ -1,13 +1,19 @@
 import {
 	SET_HISTORY_ALL,
-} from "../constants/history";
+} from '../constants/history';
 
-export default function history(state = "", action) {
+
+const initState = {
+	allHistory: null,
+};
+
+
+export default function history(state = initState, action) {
 	switch (action.type) {
 		case SET_HISTORY_ALL: {
 			return {
 				...state,
-				allHistory: action.payload
+				allHistory: action.payload,
 			}
 		}
 

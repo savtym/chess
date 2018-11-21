@@ -3,7 +3,7 @@ import Chess from "chess.js";
 import { connect } from "react-redux";
 import route from '../../redux/actions/route';
 
-import Chessboard from './Chessboard';
+import Chessboard from '../Chessboard';
 import ChessboardHeader from './ChessboardHeader';
 import CancelConfirmComponent from './CancelConfirmComponent';
 import Chat from '../Lobby/Chat';
@@ -124,7 +124,7 @@ class Game extends React.Component {
 		let tiles = [];
 		this.chess.load(value);
 		let movesSet = this.getSimpleMoves(this.state.selectedTileID);
-		this.chess.SQUARES.forEach((element, index) => {
+		this.chess.SQUARES.forEach((element) => {
 			tiles.push(
 				{
 					id: element,

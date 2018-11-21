@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
@@ -6,30 +6,69 @@ import logOut from '../../redux/actions/logOut';
 import { getAllHistory } from '../../redux/actions/history';
 
 import './header.scss';
+import History from '../History';
 
-const Header = (props) => (
-	<div className="header">
-		<div className="header__description">Chess</div>
-		<div className="header__right">
-			{props.user && (
-				<div className="header__right__username">
-					<p>Username:</p>
-					<h3>{props.user.username}</h3>
+
+class Header extends Component {
+
+	state = {
+		isOpenHistory: false,
+	};
+
+	onClickCloseHistory = () => {
+		this.setState({
+			isOpenHistory: false,
+		});
+	};
+
+	onClickOpenHistory = () => {
+		this.setState({
+			isOpenHistory: true,
+		});
+
+		this.props.getAllHistory();
+	};
+
+	render() {
+		const {
+			user,
+			logOut,
+			allHistory,
+		} = this.props;
+		const { isOpenHistory } = this.state;
+
+		return (
+			<div className="header">
+				<div className="header__description">Chess</div>
+				<div className="header__right">
+					{user && (
+						<div className="header__right__username">
+							<p>Username:</p>
+							<h3>{user.username}</h3>
+						</div>
+					)}
+
+					{user && (
+						<React.Fragment>
+							<Button bsStyle="info" onClick={this.onClickOpenHistory}>History</Button>
+							<Button bsStyle="success" onClick={logOut}>Logout</Button>
+						</React.Fragment>
+					)}
 				</div>
-			)}
 
-			{props.user && (
-				<React.Fragment>
-					<Button bsStyle="info" onClick={props.getAllHistory}>History</Button>
-					<Button bsStyle="success" onClick={props.logOut}>Logout</Button>
-				</React.Fragment>
-			)}
-		</div>
-	</div>
-);
+				<History
+					history={allHistory}
+					isOpen={isOpenHistory}
+					onClose={this.onClickCloseHistory}
+				/>
+			</div>
+		);
+	}
+}
 
 const mapStateToProps = (state) => ({
-	user: state.user.data
+	user: state.user.data,
+	allHistory: state.history.allHistory,
 });
 
 const mapDispatchToProps = (dispatch) => ({
