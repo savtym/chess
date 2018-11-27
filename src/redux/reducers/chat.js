@@ -10,6 +10,11 @@ import {
 	REMOVE_MESSAGE_LOCAL,
 } from '../constants/chat';
 
+import {
+	EXIT,
+	GIVE_UP,
+} from '../constants/ActionTypes';
+
 export const chat = (state = { messages: [], message: '', localMessages: [], localMessage: '' }, action) => {
 	switch (action.type) {
 		case USER_CONNECTED_GENERAL:
@@ -18,6 +23,13 @@ export const chat = (state = { messages: [], message: '', localMessages: [], loc
 			return {
 				...state,
 				messages: [].concat(state.messages, action.payload)
+			};
+
+		case EXIT:
+		case GIVE_UP:
+			return {
+				...state,
+				localMessages: [],
 			};
 
 

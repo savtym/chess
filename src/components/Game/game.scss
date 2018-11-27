@@ -5,7 +5,6 @@
 	width: 480px;
 	overflow: hidden;
 	grid-row-gap: 20px;
-	grid-template-rows: auto 480px minmax(auto, 1fr);
 
 	@media all and (max-height: 980px) {
 		overflow: initial;

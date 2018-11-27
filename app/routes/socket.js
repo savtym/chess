@@ -318,6 +318,8 @@ module.exports = (io) => {
 				getAllHistoryGames,
       } = new Socket(socket, io, per);
 
+      await Game.overAllGames(per);
+
       const rooms = await Rooms.getAllList();
       const messages = await Chats.getMessagesGeneralChat({}, true);
 

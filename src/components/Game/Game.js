@@ -145,7 +145,7 @@ class Game extends React.Component {
 		const lobby = 'lobby';
 
 		if (this.gameOver() || this.state.waiting_for_opponent_join || this.isPlayerLeaved()) {
-			let headerText = this.state.waiting_for_opponent_join ?
+			let headerText = this.state.waiting_for_opponent_join && !this.props.leavedPlayer ?
 				"Waiting for opponent" :
 				`${this.props.leavedPlayer || this.getCurTurnPlayerName()} lost`;
 			return (

@@ -7,6 +7,7 @@ const {
   GET_ALL_HISTORY,
   INSERT_STATE_CHESS,
   UPDATE_GIVE_UP,
+	CLOSED_GAMES,
 } = require('../db/game');
 
 
@@ -122,6 +123,25 @@ class Game {
       status: 201,
     }
   }
+
+
+
+  /**
+	 * Over all games when user connected to chess
+	 * */
+  static async overAllGames({ token }) {
+		let per = await User.permissionsToken(token);
+		if (per.status) return per;
+
+		const { err } = await db.query(CLOSED_GAMES, [per.id]);
+
+		if (err) {
+			return {
+				err: err.message,
+				status: 400,
+			}
+		}
+	}
 }
 
 

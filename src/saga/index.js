@@ -38,15 +38,13 @@ function subscribe(socket) {
 		});
 
 		socket.on('room.connect-visitor', (data) => {
-			emit(chatActions.removeMessagesFromLocalChat());
 			emit(chatActions.watcher({ user: data, isConnected: true }));
 		});
 
 		socket.on('room.connect', (data) => {
 			console.log('room.connect', data);
-			emit(chatActions.removeMessagesFromLocalChat());
-			emit(actions.updateRoomState(data));
 			emit(chatActions.connectOpponentToGame({ user: data.second_player, isConnected: true }));
+			emit(actions.updateRoomState(data));
 		});
 
 		socket.on('room.move', (data) => {

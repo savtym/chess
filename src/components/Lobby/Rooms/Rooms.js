@@ -22,7 +22,7 @@ class Rooms extends React.Component {
 	};
 
 	onCreateHandler() {
-		this.props.createRoomRequest();
+		this.props.createRoomRequest(this.props.username);
 	}
 
 	onJoinHandler(param) {
@@ -78,13 +78,14 @@ class Rooms extends React.Component {
 
 const mapStateToProps = state => {
 	return {
-		rooms: state.rooms
+		rooms: state.rooms,
+		username: state.user.data.username,
 	};
 };
 
 const mapDispatchToProps = dispatch => {
 	return {
-		createRoomRequest: () => dispatch(createRoomRequest()),
+		createRoomRequest: (params) => dispatch(createRoomRequest(params)),
 		createJoinRequest: (params) => dispatch(createJoinRequest(params)),
 		createWatchRoomRequest: (params) => dispatch(createWatchRoomRequest(params)),
 	};

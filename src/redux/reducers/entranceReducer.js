@@ -6,11 +6,18 @@ import {
 	ROOM_LEAVE,
 	UPDATE_ROOM_STATE,
 	WATCH_ROOM,
+	EXIT,
+	GIVE_UP,
 } from "../constants/ActionTypes";
 import { ROLE_BLACK, ROLE_WATCHER, ROLE_WHITE, } from "../constants/roles";
 
 export function playstate(state = "", action) {
 	switch (action.type) {
+
+		case EXIT:
+		case GIVE_UP: {
+			return {};
+		}
 
 		case ROOM_LEAVE: {
 			return {
@@ -26,7 +33,7 @@ export function playstate(state = "", action) {
 				first_player: action.payload.first_player,
 				second_player: action.payload.second_player,
 				time: action.payload.time,
-				leaved_player: ''
+				leaved_player: null,
 			};
 		case MAKE_MOVE:
 			return {
@@ -44,7 +51,7 @@ export function playstate(state = "", action) {
 				time,//main time for players
 				first_player,
 				role: ROLE_WHITE,
-				leaved_player: ''
+				leaved_player: null,
 			};
 		}
 		case WATCH_ROOM:
@@ -58,7 +65,7 @@ export function playstate(state = "", action) {
 				...state,
 				state: action.payload,
 				role: ROLE_BLACK,
-				leaved_player: ''
+				leaved_player: null,
 			};
 
 		case MAKE_MOVE_UPDATE: {//payload is  {username, state, time, is_give_up }

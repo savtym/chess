@@ -22,4 +22,11 @@ module.exports = {
       id = $1 
       AND (first_player_id = $2 OR second_player_id = $2)
     `,
+
+	CLOSED_GAMES: `
+    UPDATE games 
+    SET is_give_up = true 
+    WHERE 
+      first_player_id = $1 OR second_player_id = $1
+	`
 };
