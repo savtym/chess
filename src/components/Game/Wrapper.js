@@ -5,6 +5,7 @@ import Sound from "react-sound";
 import audioMessage from 'file-loader!../../sounds/message.mp3';
 import audioEntered from 'file-loader!../../sounds/entered.mp3';
 import audioLeaved from 'file-loader!../../sounds/leave.mp3';
+import audioStep from 'file-loader!../../sounds/step.mp3';
 
 import Game from './Game';
 
@@ -19,7 +20,8 @@ class Wrapper extends Component {
 
 	static getDerivedStateFromProps(nextProps, prevState) {
 		const {
-			player1,
+			fen,
+			makeMove,
 			player2,
 			messages,
 			username,
@@ -31,6 +33,7 @@ class Wrapper extends Component {
 
 			if (lastMsg.is_insert) {
 				return Object.assign({
+					isStep: false,
 					messages: [...messages],
 					isNewMessage: lastMsg.username !== username,
 				}, player2 && {
@@ -38,25 +41,34 @@ class Wrapper extends Component {
 				});
 			}
 
-			return Object.assign({
+			return {
 				messages: [...messages],
 				isNewMessage: false,
-			});
+				isStep: false,
+			};
 		}
 
 		if (!player2) {
 			return null;
 		}
 
-		return Object.assign({
+		if (fen !== prevState.fen && makeMove && makeMove !== username) {
+			return {
+				isStep: true,
+			}
+		}
+
+		return {
+			isStep: false,
 			isNewMessage: false,
 			isLeavedPlayer: Boolean(leavedPlayer),
 			isEntered: prevState.isEntered === undefined,
-		});
+		};
 	}
 
 	render() {
 		const {
+			isStep,
 			isEntered,
 			isNewMessage,
 			isLeavedPlayer,
@@ -73,6 +85,10 @@ class Wrapper extends Component {
 					<Sound url={audioEntered} playStatus={Sound.status.PLAYING}/>
 				)}
 
+				{isStep && (
+					<Sound url={audioStep} playStatus={Sound.status.PLAYING}/>
+				)}
+
 				{isLeavedPlayer && (
 					<Sound url={audioLeaved} playStatus={Sound.status.PLAYING}/>
 				)}
@@ -83,7 +99,9 @@ class Wrapper extends Component {
 	}
 }
 
-const mapStateToProps = ({ playstate: { first_player, second_player, leaved_player }, chat, user }) => ({
+const mapStateToProps = ({ playstate: { fen, makeMove, first_player, second_player, leaved_player }, chat, user }) => ({
+	fen,
+	makeMove,
 	player1: first_player,
 	player2: second_player,
 	leavedPlayer: leaved_player === first_player || leaved_player === second_player ? leaved_player : null,
