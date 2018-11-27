@@ -55,6 +55,7 @@ class Wrapper extends Component {
 		if (fen !== prevState.fen && makeMove && makeMove !== username) {
 			return {
 				isStep: true,
+				isNewMessage: false,
 			}
 		}
 
